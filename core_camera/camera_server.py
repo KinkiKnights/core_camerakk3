@@ -39,7 +39,7 @@ class CameraMouseNode(Node):
         camera_id = msg.camera_id
 
     def timer_callback(self):
-        global target
+        global target, camera_id
         # 0.1秒ごとにMouseCtrlメッセージをパブリッシュ
         self.mouse_ctrl.x = target
         self.publisher.publish(self.mouse_ctrl)
@@ -78,8 +78,8 @@ async def websocket_handler(websocket):
         send_task.cancel()
 
 async def ws_wait():
-    async with websockets.serve(websocket_handler, "0.0.0.0", 8100):
-        print("WebSocket start listen (ws://0.0.0.0:8100)")
+    async with websockets.serve(websocket_handler, "0.0.0.0", 8123):
+        print("WebSocket start listen (ws://0.0.0.0:8123)")
         await asyncio.Future()
 
 # メインループを開始
